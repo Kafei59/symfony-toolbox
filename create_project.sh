@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 21:13:24
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-06 22:10:35
+# @Last Modified time: 2015-07-06 22:22:10
 
 if [ -z "$1" ]
   then
@@ -13,6 +13,12 @@ fi
 if [ -d "$1" ]
 	then
 	echo "Folder already exists"
+	exit 1
+fi
+
+if [ ! -f "symfony" ];
+	then
+	echo "Symfony file missing, try launching install_symfony.sh to create one"
 	exit 1
 fi
 
