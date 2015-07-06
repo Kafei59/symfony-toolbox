@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 22:00:29
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-06 22:09:08
+# @Last Modified time: 2015-07-06 22:32:50
 
 if [ -z "$1" ]
   then
@@ -12,7 +12,7 @@ fi
 
 if [ ! -d "$1" ]
 	then
-	echo "Folder not a directory"
+	echo "Folder does not exists"
 	exit 1
 fi
 
