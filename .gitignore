@@ -1,6 +1,7 @@
 # Projets specifications #
 #########################
 symfony
+composer.phar
 toto/
 
 # Compiled source #
