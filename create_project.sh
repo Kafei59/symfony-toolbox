@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 21:13:24
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-06 22:30:07
+# @Last Modified time: 2015-07-06 22:54:04
 
 if [ -z "$1" ]
   then
@@ -30,6 +30,7 @@ echo "\n$1_core_index:\n    path:     /\n    defaults: { _controller: $1CoreBund
 
 cd $1
 sudo composer update
+sudo composer require doctrine/doctrine-fixtures-bundle
 cd ..
 
 sudo rm -rf $1/app/cache/*
