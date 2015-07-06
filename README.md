@@ -8,4 +8,4 @@ Toolbox of useful scripts to properly launch a symfony project
 <li> <strong>cache_clear.sh "project_folder":</strong> Clear all cache files present in absolute path folder.</li>
 </ul>
 
-Project create by Pierrick Gicquelais (@Kafei59)
+<em>Project created by Pierrick Gicquelais (@Kafei59)</em>
