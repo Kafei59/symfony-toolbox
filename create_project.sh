@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 21:13:24
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-06 22:22:10
+# @Last Modified time: 2015-07-06 22:30:07
 
 if [ -z "$1" ]
   then
@@ -24,9 +24,9 @@ fi
 
 symfony new $1
 php $1/app/check.php
-php $1/app/console generate:bundle --namespace=$1/Bundle/CoreBundle --bundle-name=$1CoreBundle --dir=$1/src/ --format=yml --structure --no-interaction
+php $1/app/console generate:bundle --namespace=$1/CoreBundle --bundle-name=$1CoreBundle --dir=$1/src/ --format=yml --structure --no-interaction
 
-echo "\n$1_core_index:\n    path:     /\n    defaults: { _controller: $1CoreBundle:Default:index, name: World }" >> $1/src/$1/Bundle/CoreBundle/Resources/config/routing.yml
+echo "\n$1_core_index:\n    path:     /\n    defaults: { _controller: $1CoreBundle:Default:index, name: World }" >> $1/src/$1/CoreBundle/Resources/config/routing.yml
 
 cd $1
 sudo composer update
