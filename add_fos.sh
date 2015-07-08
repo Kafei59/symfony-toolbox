@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 23:04:37
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-08 15:01:33
+# @Last Modified time: 2015-07-08 15:10:51
 
 if [ -z "$1" ]
   then
@@ -23,12 +23,13 @@ if [ -d "$1/src/$1/UserBundle" ]
 fi
 
 PROJECT=$(echo $1 | sed s'/[\/]*$//')
+NAME=$(echo "$PROJECT" | rev | cut -d'/' -f 1 | rev)
 
 cd "$PROJECT"
-sudo php ../composer.phar require friendsofsymfony/user-bundle
-sudo php ../composer.phar update
+sudo php composer.phar require friendsofsymfony/user-bundle
+sudo php composer.phar update
 sed -i '/CoreBundle(),/anew FOS\\UserBundle\\FOSUserBundle(),' app/AppKernel.php
-cd ..
+cd -
 
 sudo rm -rf "$PROJECT"/app/cache/*
 sudo rm -rf "$PROJECT"/app/logs/*
@@ -44,7 +45,7 @@ echo "
 fos_user:
     db_driver:     orm
     firewall_name: main
-    user_class:    "$PROJECT"\UserBundle\Entity\User" >> "$PROJECT"/app/config/config.yml
+    user_class:    "$NAME"\UserBundle\Entity\User" >> "$PROJECT"/app/config/config.yml
 
 echo "
 fos_user_security:
@@ -68,7 +69,7 @@ fos_user_change_password:
 
 echo "security:
     encoders:
-        "$PROJECT"\UserBundle\Entity\User: sha512
+        "$NAME"\UserBundle\Entity\User: sha512
 
     providers:
         main:
@@ -88,20 +89,20 @@ echo "security:
             remember_me:
                 key:        %secret%" > "$PROJECT"/app/config/security.yml
 
-php "$PROJECT"/app/console generate:bundle --namespace="$PROJECT"/UserBundle --bundle-name="$PROJECT"UserBundle --dir="$PROJECT"/src/ --format=yml --structure --no-interaction
+php "$PROJECT"/app/console generate:bundle --namespace="$NAME"/UserBundle --bundle-name="$NAME"UserBundle --dir="$PROJECT"/src/ --format=yml --structure --no-interaction
 
 echo "<?php
-namespace "$PROJECT"\UserBundle;
+namespace "$NAME"\UserBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class "$PROJECT"UserBundle extends Bundle
+class "$NAME"UserBundle extends Bundle
 {
   public function getParent()
   {
     return 'FOSUserBundle';
   }
-}" > "$PROJECT"/src/"$PROJECT"/UserBundle/"$PROJECT"UserBundle.php
+}" > "$PROJECT"/src/"$NAME"/UserBundle/"$NAME"UserBundle.php
 
 sudo rm -rf "$PROJECT"/app/cache/*
 sudo rm -rf "$PROJECT"/app/logs/*
@@ -112,10 +113,10 @@ php "$PROJECT"/app/console cache:clear --env=prod --no-warmup
 sudo chmod -R 777 "$PROJECT"/app/cache/
 sudo chmod -R 777 "$PROJECT"/app/logs/
 
-php "$PROJECT"/app/console doctrine:generate:entity --entity="$PROJECT"UserBundle:User --format=annotation --with-repository --no-interaction
-sed -i '/as ORM;/ause FOS\\UserBundle\\Entity\\User as BaseUser;' "$PROJECT"/src/"$PROJECT"/UserBundle/Entity/User.php
-sed -i "s/class User/class User extends BaseUser/g" "$PROJECT"/src/"$PROJECT"/UserBundle/Entity/User.php
-sed -i "s/private \$id;/protected \$id;/g" "$PROJECT"/src/"$PROJECT"/UserBundle/Entity/User.php
+php "$PROJECT"/app/console doctrine:generate:entity --entity="$NAME"UserBundle:User --format=annotation --with-repository --no-interaction
+sed -i '/as ORM;/ause FOS\\UserBundle\\Entity\\User as BaseUser;' "$PROJECT"/src/"$NAME"/UserBundle/Entity/User.php
+sed -i "s/class User/class User extends BaseUser/g" "$PROJECT"/src/"$NAME"/UserBundle/Entity/User.php
+sed -i "s/private \$id;/protected \$id;/g" "$PROJECT"/src/"$NAME"/UserBundle/Entity/User.php
 
 sudo rm -rf "$PROJECT"/app/cache/*
 sudo rm -rf "$PROJECT"/app/logs/*

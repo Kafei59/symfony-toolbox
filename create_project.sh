@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 21:13:24
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-08 15:01:43
+# @Last Modified time: 2015-07-08 15:09:25
 
 if [ -z "$1" ]
   then
@@ -29,21 +29,23 @@ if [ ! -f "composer.phar" ];
 fi
 
 PROJECT=$(echo $1 | sed s'/[\/]*$//')
+NAME=$(echo "$PROJECT" | rev | cut -d'/' -f 1 | rev)
 
 symfony new "$PROJECT"
+cp composer.phar "$1"
 php "$PROJECT"/app/check.php
-php "$PROJECT"/app/console generate:bundle --namespace="$PROJECT"/CoreBundle --bundle-name="$PROJECT"CoreBundle --dir="$PROJECT"/src/ --format=yml --structure --no-interaction
+php "$PROJECT"/app/console generate:bundle --namespace="$NAME"/CoreBundle --bundle-name="$NAME"CoreBundle --dir="$PROJECT"/src/ --format=yml --structure --no-interaction
 
-echo "\n"$PROJECT"_core_index:\n    path:     /\n    defaults: { _controller: "$PROJECT"CoreBundle:Default:index, name: World }" >> "$PROJECT"/src/"$PROJECT"/CoreBundle/Resources/config/routing.yml
+echo "\n"$NAME"_core_index:\n    path:     /\n    defaults: { _controller: "$NAME"CoreBundle:Default:index, name: World }" >> "$PROJECT"/src/"$NAME"/CoreBundle/Resources/config/routing.yml
 
 cd "$PROJECT"
-sudo php ../composer.phar require doctrine/doctrine-fixtures-bundle
-sudo php ../composer.phar update
+sudo php composer.phar require doctrine/doctrine-fixtures-bundle
+sudo php composer.phar update
 sed -i '/SensioGeneratorBundle();/a$bundles[] = new Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle();' app/AppKernel.php
-cd ..
+cd -
 
-sed -i "s/symfony/"$PROJECT"/g" "$PROJECT"/app/config/parameters.yml
-sed -i "s/symfony/"$PROJECT"/g" "$PROJECT"/app/config/parameters.yml.dist
+sed -i "s/symfony/"$NAME"/g" "$PROJECT"/app/config/parameters.yml
+sed -i "s/symfony/"$NAME"/g" "$PROJECT"/app/config/parameters.yml.dist
 
 sudo rm -rf "$PROJECT"/app/cache/*
 sudo rm -rf "$PROJECT"/app/logs/*
