@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 22:00:29
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-06 22:32:50
+# @Last Modified time: 2015-07-08 12:56:29
 
 if [ -z "$1" ]
   then
@@ -16,10 +16,12 @@ if [ ! -d "$1" ]
 	exit 1
 fi
 
-sudo rm -rf $1/app/cache/*
-sudo rm -rf $1/app/logs/*
+PROJECT=$(echo $1 | sed s'/[\/]*$//')
 
-php $1/app/console cache:clear --env=prod
+sudo rm -rf "$PROJECT"/app/cache/*
+sudo rm -rf "$PROJECT"/app/logs/*
 
-chmod -R 777 $1/app/cache/
-chmod -R 777 $1/app/logs/
+php "$PROJECT"/app/console cache:clear --env=prod
+
+chmod -R 777 "$PROJECT"/app/cache/
+chmod -R 777 "$PROJECT"/app/logs/

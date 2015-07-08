@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 22:31:33
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-06 22:36:42
+# @Last Modified time: 2015-07-08 12:56:59
 
 if [ -z "$1" ] || [ -z "$2" ]
   then
@@ -22,4 +22,6 @@ if [ -d "$1/src/$1/$2Bundle" ]
 	exit 1
 fi
 
-php $1/app/console generate:bundle --namespace=$1/$2Bundle --bundle-name=$1$2Bundle --dir=$1/src/ --format=yml --structure --no-interaction
+PROJECT=$(echo $1 | sed s'/[\/]*$//')
+
+php "$PROJECT"/app/console generate:bundle --namespace="$PROJECT"/$2Bundle --bundle-name="$PROJECT"$2Bundle --dir="$PROJECT"/src/ --format=yml --structure --no-interaction
