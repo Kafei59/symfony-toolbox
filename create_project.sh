@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 21:13:24
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-06 23:38:11
+# @Last Modified time: 2015-07-08 11:41:24
 
 if [ -z "$1" ]
   then
@@ -39,6 +39,14 @@ sudo php ../composer.phar require doctrine/doctrine-fixtures-bundle
 sudo php ../composer.phar update
 sudo sed -i '/SensioGeneratorBundle();/a$bundles[] = new Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle();' app/AppKernel.php
 cd ..
+
+sudo sed -i "s/symfony/$1/g" $1/app/config/parameters.yml
+sudo sed -i "s/symfony/$1/g" $1/app/config/parameters.yml.dist
+
+php $1/app/console cache:clear --env=prod --no-warmup
+
+sudo php $1/app/console doctrine:ensure-production-settings --env=prod
+sudo php $1/app/console doctrine:database:create --if-not-exists
 
 sudo rm -rf $1/app/cache/*
 sudo rm -rf $1/app/logs/*
