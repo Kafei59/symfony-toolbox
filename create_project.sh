@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 21:13:24
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-08 14:24:16
+# @Last Modified time: 2015-07-08 15:01:43
 
 if [ -z "$1" ]
   then
@@ -11,21 +11,21 @@ if [ -z "$1" ]
 fi
 
 if [ -d "$1" ]
-	then
-	echo "Folder already exists"
-	exit 1
+    then
+    echo "Folder already exists"
+    exit 1
 fi
 
 if [ ! -f "symfony" ];
-	then
-	echo "Symfony file missing, try launching install_symfony.sh to create one"
-	exit 1
+    then
+    echo "Symfony file missing, try launching install_symfony.sh to create one"
+    exit 1
 fi
 
 if [ ! -f "composer.phar" ];
-	then
-	echo "Composer.phar file missing, try launching install_symfony.sh to create one"
-	exit 1
+    then
+    echo "Composer.phar file missing, try launching install_symfony.sh to create one"
+    exit 1
 fi
 
 PROJECT=$(echo $1 | sed s'/[\/]*$//')

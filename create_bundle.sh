@@ -2,7 +2,7 @@
 # @Author: gicque_p
 # @Date:   2015-07-06 22:31:33
 # @Last Modified by:   gicque_p
-# @Last Modified time: 2015-07-08 13:28:12
+# @Last Modified time: 2015-07-08 15:01:39
 
 if [ -z "$1" ] || [ -z "$2" ]
   then
@@ -11,15 +11,15 @@ if [ -z "$1" ] || [ -z "$2" ]
 fi
 
 if [ ! -d "$1" ]
-	then
-	echo "Folder does not exists"
-	exit 1
+    then
+    echo "Folder does not exists"
+    exit 1
 fi
 
 if [ -d "$1/src/$1/$2Bundle" ]
-	then
-	echo "Bundle already exists"
-	exit 1
+    then
+    echo "Bundle already exists"
+    exit 1
 fi
 
 PROJECT=$(echo $1 | sed s'/[\/]*$//')
