@@ -1,6 +1,8 @@
 # symfony-toolbox
 Toolbox of useful scripts to properly launch a symfony project
 
+<h1> WARNING: For now on, you can only create functional projects in the same directory as those scripts (gonna be fixed soon)</h1>
+
 <h3> List of actual scripts </h3>
 <ul>
 <li> <strong>install_symfony.sh:</strong> Launch a properly symfony file to create project (MUST BE DONE AT LEAST ONE).</li>
