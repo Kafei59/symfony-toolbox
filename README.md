@@ -11,9 +11,9 @@ Toolbox of useful scripts to properly launch a symfony project
 
 ## Examples
 
-`./create_project.sh ../web-projects/SymfonyFooBar`
-`./add_fos.sh ../web-projects/SymfonyFooBar`
-`./create_bundle.sh ../web-projects/SymfonyFooBar MyNewBundle`
-`./cache_clear.sh ../web-projects/SymfonyFooBar`
+> `./create_project.sh ../web-projects/SymfonyFooBar`
+> `./add_fos.sh ../web-projects/SymfonyFooBar`
+> `./create_bundle.sh ../web-projects/SymfonyFooBar MyNewBundle`
+> `./cache_clear.sh ../web-projects/SymfonyFooBar`
 
 *Project created by Pierrick Gicquelais (@Kafei59)*
